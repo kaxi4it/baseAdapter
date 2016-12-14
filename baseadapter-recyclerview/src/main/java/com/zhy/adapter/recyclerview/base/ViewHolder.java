@@ -20,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.zhy.adapter.recyclerview.listener.EasyOnItemChildClickListener;
+
 public class ViewHolder extends RecyclerView.ViewHolder
 {
     private SparseArray<View> mViews;
@@ -264,6 +266,33 @@ public class ViewHolder extends RecyclerView.ViewHolder
     {
         View view = getView(viewId);
         view.setOnLongClickListener(listener);
+        return this;
+    }
+
+    /**
+     * 绑定itemChild点击事件
+     */
+    private EasyOnItemChildClickListener easyOnItemChildClickListener;
+
+    public void setEasyOnItemChildClickListener(EasyOnItemChildClickListener easyOnItemChildClickListener){
+        this.easyOnItemChildClickListener=easyOnItemChildClickListener;
+    }
+
+    /**
+     * holder中直接绑定相应id的view
+     * @param viewId
+     * @return
+     */
+    public ViewHolder setOnItemChildClickListener(int viewId){
+        View view = getView(viewId);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null!=easyOnItemChildClickListener){
+                    easyOnItemChildClickListener.onClick(v,getAdapterPosition());
+                }
+            }
+        });
         return this;
     }
 

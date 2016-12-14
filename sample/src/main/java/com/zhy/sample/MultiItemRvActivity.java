@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.listener.EasyOnItemChildClickListener;
 import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
 import com.zhy.sample.adapter.rv.ChatAdapterForRv;
 import com.zhy.sample.bean.ChatMessage;
@@ -63,19 +64,19 @@ public class MultiItemRvActivity extends AppCompatActivity
             }
         });
 
-        adapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener()
+        adapter.setEasyOnItemChildClickListener(new EasyOnItemChildClickListener()
         {
             @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder,  int position)
-            {
-                Toast.makeText(MultiItemRvActivity.this, "Click:" + position , Toast.LENGTH_SHORT).show();
-            }
+            public void onClick(View view, int position) {
+                switch (view.getId()){
+                    case R.id.chat_send_content:
+                        Toast.makeText(MultiItemRvActivity.this, "Click Send:" + position , Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.chat_from_content:
+                        Toast.makeText(MultiItemRvActivity.this, "Click From:" + position , Toast.LENGTH_SHORT).show();
+                        break;
+                }
 
-            @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position)
-            {
-                Toast.makeText(MultiItemRvActivity.this, "LongClick:" + position , Toast.LENGTH_SHORT).show();
-                return false;
             }
         });
         mRecyclerView.setAdapter(mLoadMoreWrapper);

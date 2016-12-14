@@ -29,5 +29,6 @@ public class MsgComingItemDelagate implements ItemViewDelegate<ChatMessage>
         holder.setText(R.id.chat_from_content, chatMessage.getContent());
         holder.setText(R.id.chat_from_name, chatMessage.getName());
         holder.setImageResource(R.id.chat_from_icon, chatMessage.getIcon());
+        holder.setOnItemChildClickListener(R.id.chat_from_content);
     }
 }

@@ -29,5 +29,6 @@ public class MsgSendItemDelagate implements ItemViewDelegate<ChatMessage>
         holder.setText(R.id.chat_send_content, chatMessage.getContent());
         holder.setText(R.id.chat_send_name, chatMessage.getName());
         holder.setImageResource(R.id.chat_send_icon, chatMessage.getIcon());
+        holder.setOnItemChildClickListener(R.id.chat_send_content);
     }
 }

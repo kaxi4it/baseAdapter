@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.zhy.adapter.recyclerview.CommonAdapter;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
+import com.zhy.adapter.recyclerview.listener.EasyOnItemChildClickListener;
 import com.zhy.adapter.recyclerview.wrapper.EmptyWrapper;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
 import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
@@ -55,6 +56,7 @@ public class RecyclerViewActivity extends AppCompatActivity
             protected void convert(ViewHolder holder, String s, int position)
             {
                 holder.setText(R.id.id_item_list_title, s + " : " + holder.getAdapterPosition() + " , " + holder.getLayoutPosition());
+                holder.setOnItemChildClickListener(R.id.id_item_list_title);
             }
         };
 
@@ -81,24 +83,17 @@ public class RecyclerViewActivity extends AppCompatActivity
                         mLoadMoreWrapper.notifyDataSetChanged();
 
                     }
-                }, 3000);
+                }, 2000);
             }
         });
 
         mRecyclerView.setAdapter(mLoadMoreWrapper);
-        mAdapter.setOnItemClickListener(new CommonAdapter.OnItemClickListener()
+        mAdapter.setEasyOnItemChildClickListener(new EasyOnItemChildClickListener()
         {
             @Override
-            public void onItemClick(View view, RecyclerView.ViewHolder holder,  int position)
-            {
+            public void onClick(View view, int position) {
                 Toast.makeText(RecyclerViewActivity.this, "pos = " + position, Toast.LENGTH_SHORT).show();
                 mAdapter.notifyItemRemoved(position);
-            }
-
-            @Override
-            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position)
-            {
-                return false;
             }
         });
     }
