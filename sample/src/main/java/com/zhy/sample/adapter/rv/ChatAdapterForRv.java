@@ -18,5 +18,6 @@ public class ChatAdapterForRv extends MultiItemTypeAdapter<ChatMessage>
 
         addItemViewDelegate(new MsgSendItemDelagate());
         addItemViewDelegate(new MsgComingItemDelagate());
+        addItemViewDelegate(new MsgTimeItemDelagate());
     }
 }
